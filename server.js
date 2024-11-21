@@ -1,10 +1,10 @@
-import express from 'express'
+import express from 'express'; // Importa o framework Express.js para criar a aplicação web
+import routes from './src/routes/postsRoutes.js';
 
-const app = express()
-app.listen(3000, ()=>{
+// Cria uma instância da aplicação Express
+const app = express();
+routes(app);
 
-})
-
-app.get("/api", (req, res)=>{
-    res.status(200).send("Imersão Alura")
-})
+app.listen(3000, () => {
+  console.log("Servidor escutando..."); // Inicia o servidor na porta 3000 e exibe uma mensagem no console
+});
