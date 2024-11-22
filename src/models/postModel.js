@@ -1,3 +1,5 @@
+import 'dotenv/config';
+import { ObjectId } from "mongodb";
 import conectarAoBanco from "../config/dbMongo.js"
 
 // Estabelece a conexão com o banco de dados MongoDB usando a string de conexão obtida da variável de ambiente STRING_CONEXAO
@@ -17,4 +19,12 @@ export async function criarPost(novoPost) {
     const db = conexao.db('imersao-alura');
     const colecao = db.collection('posts');
     return colecao.insertOne(novoPost)
+}
+
+export async function atualizaPost(id, novoPost) {
+    const objId = ObjectId.createFromHexString(id)
+
+    const db = conexao.db('imersao-alura');
+    const colecao = db.collection('posts');
+    return colecao.updateOne({_id: new ObjectId(objId)},{$set:novoPost})
 }
